@@ -1,0 +1,479 @@
+:root {
+  --bg: #0b0b0f;
+  --panel: #111217;
+  --accent: #ff5c7a;
+  --accent2: #ff8c64;
+  --text: #e6e6e9;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(180deg, #05050a 0%, #0b0b12 100%);
+  color: var(--text);
+  font-family: 'Inter', system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--accent);
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: var(--text);
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+button {
+  padding: 12px 28px;
+  margin: 10px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(145deg, var(--accent), var(--accent2));
+  color: #111;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+button:hover:enabled {
+  background: linear-gradient(145deg, #ff79a0, #ff6f50);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+}
+
+button:disabled {
+  background: #2c1e33;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+input {
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: 2px solid #2c1e33;
+  background: #08080a;
+  color: var(--text);
+  font-size: 1rem;
+  margin-bottom: 10px;
+  text-align: center;
+  outline: none;
+  transition: 0.3s;
+}
+
+input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+#levelsMenu button {
+  width: 120px;
+}
+
+#gameMessage {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(17, 18, 23, 0.9);
+  padding: 15px 25px;
+  border-radius: 15px;
+  font-size: 18px;
+  color: var(--text);
+  max-width: 80%;
+  display: none;
+  z-index: 999;
+  animation: fadeIn 0.3s ease-in-out;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(255,92,122,0.1) 0%, transparent 70%);
+  animation: rotateBG 30s linear infinite;
+  z-index: -1;
+}
+
+@keyframes rotateBG {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Estilo padrão para todas as imagens */
+img {
+  width: 200px; /* tamanho inicial */
+  height: 200px;
+  border-radius: 50%; /* forma inicial */
+  object-fit: cover;
+  transition: all 0.4s ease; /* suaviza a transformação */
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Efeito ao passar o mouse */
+img:hover {
+  transform: scale(1.1) rotate(5deg); /* aumenta e gira levemente */
+  border-radius: 50%; /* muda para circular */
+  box-shadow: 0 10px 25px rgba(255, 92, 122, 0.6); /* sombra mais chamativa */
+}
+
+/* =======================
+   Summary & Details
+   ======================= */
+details {
+  background: var(--panel);
+  padding: 12px 18px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+details[open] {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #111;
+}
+
+summary {
+  font-weight: 700;
+  font-size: 1.1rem;
+  outline: none;
+  list-style: none;
+}
+
+summary::-webkit-details-marker {
+  display: none; /* remove o marcador padrão */
+}
+
+/* =======================
+   UL & LI corrigido
+   ======================= */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 20px 0;
+}
+
+li {
+  display: block;
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  background: var(--panel); /* fundo consistente */
+  color: var(--text);       /* texto visível */
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+details[open] li {
+  background: var(--panel); /* força fundo mesmo quando details está aberto */
+  color: var(--text);       /* força cor do texto */
+}
+
+li:hover {
+  background: linear-gradient(145deg, var(--accent), var(--accent2));
+  color: #111;
+  transform: scale(1.03);
+}
+
+/* =======================
+   Navbar
+   ======================= */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--panel);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 12px 0;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  z-index: 1000;
+}
+
+.navbar a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 6px 12px;
+  transition: all 0.3s ease;
+}
+
+.navbar a:hover {
+  color: var(--accent);
+  transform: scale(1.1);
+}
+
+/* =======================
+   Sidebar
+   ======================= */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 60px; /* abaixo da navbar */
+  width: 220px;
+  height: calc(100% - 60px);
+  background: var(--panel);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 2px 0 15px rgba(0,0,0,0.5);
+  transition: all 0.3s ease;
+}
+
+.sidebar a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.sidebar a:hover {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #111;
+}
+
+/* =======================
+   Barra diagonal (corner nav)
+   ======================= */
+.diagonal-nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px; /* espaço interno do botão */
+  background: linear-gradient(45deg, var(--accent), var(--accent2));
+  color: #111;
+  font-weight: 700;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  transform: skew(-20deg); /* deixa a barra diagonal */
+  z-index: 1000;
+  transition: all 0.3s ease;
+  white-space: nowrap; /* impede quebra de texto */
+  cursor: pointer;
+}
+
+.diagonal-nav span {
+  display: inline-block;
+  transform: skew(20deg); /* corrige o texto para ficar reto */
+}
+
+.diagonal-nav:hover {
+  background: linear-gradient(45deg, #ff79a0, #ff6f50);
+  transform: scale(1.05) skew(-20deg);
+}
+
+/* =======================
+   Cards
+   ======================= */
+.card {
+  background: var(--panel);
+  border-radius: 16px;
+  padding: 20px;
+  width: 280px;
+  margin: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-5px) scale(1.02);
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #111;
+}
+
+/* =======================
+   Pop-up modal
+   ======================= */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: none; /* oculto por padrão */
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-content {
+  background: var(--panel);
+  padding: 30px;
+  border-radius: 16px;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+  position: relative;
+  color: var(--text);
+  transition: all 0.3s ease;
+}
+
+.modal-content h2 {
+  margin-bottom: 15px;
+  color: var(--accent);
+}
+
+.modal-content p {
+  margin-bottom: 20px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--accent);
+  transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+  color: var(--accent2);
+  transform: scale(1.2);
+}
+
+.flip-card {
+  background-color: transparent;
+  width: 200px;
+  height: 250px;
+  perspective: 1000px;
+  margin: 20px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.flip-card-front {
+  background: var(--panel);
+  color: var(--text);
+}
+
+.flip-card-back {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #111;
+  transform: rotateY(180deg);
+}
+
+.progress-container {
+  width: 80%;
+  background-color: var(--panel);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 20px auto;
+  height: 25px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 12px;
+  transition: width 0.4s ease;
+}
+
+.slider-container {
+  width: 300px;
+  margin: 20px auto;
+  text-align: center;
+  color: var(--text);
+  font-weight: 500;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--panel);
+  outline: none;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  transition: all 0.3s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  background: var(--accent2);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  transition: all 0.3s ease;
+}
